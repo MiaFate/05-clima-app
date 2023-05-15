@@ -1,9 +1,10 @@
 import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js"
+import Searchs from "./models/searchs.js";
 import Search from "./models/searchs.js";
 
 const main = async () => {
   let opt;
-  const search = new Search();
+  const searchs = new Search();
 
   do {
     opt = await inquirerMenu();
@@ -11,8 +12,7 @@ const main = async () => {
     switch (opt) {
       case 1:
         const place = await readInput('City: ');
-        console.log(place);
-
+        await searchs.city(place);
         console.log('\nCity information\n'.green);
         console.log('City:',);
         console.log('lat:',);
