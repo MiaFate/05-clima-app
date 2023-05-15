@@ -1,10 +1,9 @@
 import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js"
 import Searchs from "./models/searchs.js";
-import Search from "./models/searchs.js";
 
 const main = async () => {
   let opt;
-  const searchs = new Search();
+  const searchs = new Searchs();
 
   do {
     opt = await inquirerMenu();
