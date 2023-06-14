@@ -1,4 +1,6 @@
-import { inquirerMenu, pause, readInput } from "./helpers/inquirer.js"
+import colors from "colors";
+
+import { inquirerMenu, pause, readInput, placesList } from "./helpers/inquirer.js"
 import Searchs from "./models/searchs.js";
 
 const main = async () => {
@@ -10,16 +12,26 @@ const main = async () => {
 
     switch (opt) {
       case 1:
-        const place = await readInput('City: ');
-        await searchs.city(place);
-        console.log('\nCity information\n'.green);
-        console.log('City:',);
-        console.log('lat:',);
-        console.log('Lng:',);
-        console.log('Temperature:',);
-        console.log('Min:',);
-        console.log('Max:',);
+        //Mostrar mensajes
+        const prompt = await readInput('City: ');
+        //Buscar los lugares
+        const places = await searchs.city(prompt);
+        //Seleccionar el lugar
+        const id = await placesList(places);
+        const selectedPlace = places.find(place => place.id = id)
+        //Ciima
+        const weather = await searchs.weatherByPlace(selectedPlace.lat, selectedPlace.lng);
 
+        //mostrar resultados
+        //console.clear()
+        console.log('\nCity information\n'.green);
+        console.log('City:', selectedPlace.name);
+        console.log('lat:', selectedPlace.lat);
+        console.log('Lng:', selectedPlace.lng);
+        console.log('Temperature:', weather.temp);
+        console.log('Min:', weather.min);
+        console.log('Max:', weather.max);
+        console.log('Description:', weather.description.brightGreen);
 
 
         break;
